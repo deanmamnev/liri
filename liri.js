@@ -26,62 +26,62 @@ client.get('statuses/user_timeline', function(error, tweets, response) {
   }
 });
  
-// spotify
-//   .request('https://api.spotify.com/v1/tracks/7yCPwWs66K8Ba5lFuU2bcx')
-//   .then(function(data) {
-//     console.log(data); 
-//   })
-//   .catch(function(err) {
-//     console.error('Error occurred: ' + err); 
-//   });
+spotify
+  .request('https://api.spotify.com/v1/tracks/7yCPwWs66K8Ba5lFuU2bcx')
+  .then(function(data) {
+    console.log(data); 
+  })
+  .catch(function(err) {
+    console.error('Error occurred: ' + err); 
+  });
 
 
 
 
 // movie-this [processargv3]
 
-// if (process.argv[2] === "movie-this"){
+if (process.argv[2] === "movie-this"){
 
-// var movieName = process.argv[3];
-// var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
-// console.log(queryUrl);
+var movieName = process.argv[3];
+var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
+console.log(queryUrl);
 
-// request(queryUrl, function(error, response, body) {
+request(queryUrl, function(error, response, body) {
 
-//   // If the request is successful
-//   if (!error && response.statusCode === 200) {
+  // If the request is successful
+  if (!error && response.statusCode === 200) {
 
-//     // Parse the body of the site and recover just the imdbRating
-//     // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
-//     // console.log("Title: " + JSON.parse(body.Title));
-//     console.log("Release Year: " + JSON.parse(body.Year));
-//     // console.log("IMDB Rating: " + JSON.parse(body.Rating));
-//     // console.log("Rotton Tomatoes Rating: " + JSON.parse(body.Title));
-//     // console.log("Country: " + JSON.parse(body.Country));
-//     // console.log("Language: " + JSON.parse(body.Language));
-//     // console.log("Plot: " + JSON.parse(body.Plot));
-//     // console.log("Starring: " + JSON.parse(body.Actors));
-//   }
-// });
-// };
+    // Parse the body of the site and recover just the imdbRating
+    // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
+    // console.log("Title: " + JSON.parse(body.Title));
+    console.log("Release Year: " + JSON.parse(body.Year));
+    // console.log("IMDB Rating: " + JSON.parse(body.Rating));
+    // console.log("Rotton Tomatoes Rating: " + JSON.parse(body.Title));
+    // console.log("Country: " + JSON.parse(body.Country));
+    // console.log("Language: " + JSON.parse(body.Language));
+    // console.log("Plot: " + JSON.parse(body.Plot));
+    // console.log("Starring: " + JSON.parse(body.Actors));
+  }
+});
+};
 
 
 
-// if (process.argv[2] == 'do-what-it-says') { 
-//     fs.readFile('random.txt', 'utf8', function (err, data) {
-//       if (err) {
-//         return console.log(err);
-//       }
-//       var array = data.split(',');
-//       console.log(array);
-//       if (array[0] == 'spotify-this-song') {
-//         spotifyThis(array[1]);
-//       }
-//       if (array[0] == 'my-tweets') {
-//         tweetThis(array[1]);
-//       }
-//       if (array[0] == 'movie-this') {
-//         omdbIt(array[1]);
-//       }
-//     })
-//   }
+if (process.argv[2] == 'do-what-it-says') { 
+    fs.readFile('random.txt', 'utf8', function (err, data) {
+      if (err) {
+        return console.log(err);
+      }
+      var results = data.split(',');
+      console.log(results);
+      if (results[0] == 'spotify-this-song') {
+        spotifyThis(results[1]);
+      }
+      if (results[0] == 'my-tweets') {
+        tweetThis(results[1]);
+      }
+      if (results[0] == 'movie-this') {
+        omdbIt(results[1]);
+      }
+    })
+  }
