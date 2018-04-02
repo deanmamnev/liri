@@ -18,12 +18,19 @@ var client = new Twitter(keys.twitter);
 //     console.log(response);
 // });
 
+
+var params = {screen_name: '@phil_skeezix'};
+client.get('statuses/user_timeline', function(error, tweets, response) {
+  if (!error) {
+    console.log(tweets);
+  }
+});
  
-spotify
-  .request('https://api.spotify.com/v1/tracks/7yCPwWs66K8Ba5lFuU2bcx')
-  .then(function(data) {
-    console.log(data); 
-  })
-  .catch(function(err) {
-    console.error('Error occurred: ' + err); 
-  });
+// spotify
+//   .request('https://api.spotify.com/v1/tracks/7yCPwWs66K8Ba5lFuU2bcx')
+//   .then(function(data) {
+//     console.log(data); 
+//   })
+//   .catch(function(err) {
+//     console.error('Error occurred: ' + err); 
+//   });
