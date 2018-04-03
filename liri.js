@@ -18,70 +18,92 @@ var client = new Twitter(keys.twitter);
 //     console.log(response);
 // });
 
+function tweetThis(tweetstring) {
+    var params = { screen_name: '@phil_skeezix' };
+    client.get('statuses/user_timeline', function (error, tweets, response) {
+        if (!error) {
+            console.log(tweets);
+        }
+    });
+}
 
-var params = {screen_name: '@phil_skeezix'};
-client.get('statuses/user_timeline', function(error, tweets, response) {
-  if (!error) {
-    console.log(tweets);
-  }
-});
- 
-spotify
-  .request('https://api.spotify.com/v1/tracks/7yCPwWs66K8Ba5lFuU2bcx')
-  .then(function(data) {
-    console.log(data); 
-  })
-  .catch(function(err) {
-    console.error('Error occurred: ' + err); 
+
+
+//WRONG CODE
+// spotify
+//     .request('https://api.spotify.com/v1/tracks/7yCPwWs66K8Ba5lFuU2bcx')
+//     .then(function (data) {
+//         console.log(data);
+//     })
+//     .catch(function (err) {
+//         console.error('Error occurred: ' + err);
+//     });
+
+if(process.argv[2] === "spotify-this-song") {
+    spotifyThis(
+        process.argv[3]
+    );
+
+
+}
+
+function spotifyThis(spotifystring){
+   
+  spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
+    if (err) {
+      return console.log('Error occurred: ' + err);
+    }
+   
+  console.log(data); 
+  console.log(JSON.stringify(data, null, 2));
   });
-
-
+}
 
 
 // movie-this [processargv3]
 
-if (process.argv[2] === "movie-this"){
+if (process.argv[2] === "movie-this") {
 
-var movieName = process.argv[3];
-var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
-console.log(queryUrl);
+    var movieName = process.argv[3];
+    var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
+    console.log(queryUrl);
 
-request(queryUrl, function(error, response, body) {
+    request(queryUrl, function (error, response, body) {
 
-  // If the request is successful
-  if (!error && response.statusCode === 200) {
+        // If the request is successful
+        if (!error && response.statusCode === 200) {
 
 
 
-    console.log("Title: " + JSON.parse(body.Title));
-    console.log("Release Year: " + JSON.parse(body.Year));
-    console.log("IMDB Rating: " + JSON.parse(body.Rating));
-    console.log("Rotton Tomatoes Rating: " + JSON.parse(body.Title));
-    console.log("Country: " + JSON.parse(body.Country));
-    console.log("Language: " + JSON.parse(body.Language));
-    console.log("Plot: " + JSON.parse(body.Plot));
-    console.log("Starring: " + JSON.parse(body.Actors));
-  }
-});
+            console.log("Title: " + JSON.parse(body).Title);
+            console.log("Release Year: " + JSON.parse(body).Year);
+            console.log("IMDB Rating: " + JSON.parse(body).Rating);
+            console.log("Rotton Tomatoes Rating: " + JSON.parse(body).Title);
+            console.log("Country: " + JSON.parse(body).Country);
+            console.log("Language: " + JSON.parse(body).Language);
+            console.log("Plot: " + JSON.parse(body).Plot);
+            console.log("Starring: " + JSON.parse(body).Actors);
+        }
+    });
 };
 
 
 
-if (process.argv[2] == 'do-what-it-says') { 
+if (process.argv[2] == 'do-what-it-says') {
     fs.readFile('random.txt', 'utf8', function (err, data) {
-      if (err) {
-        return console.log(err);
-      }
-      var results = data.split(',');
-      console.log(results);
-      if (results[0] == 'spotify-this-song') {
-        spotifyThis(results[1]);
-      }
-      if (results[0] == 'my-tweets') {
-        tweetThis(results[1]);
-      }
-      if (results[0] == 'movie-this') {
-        omdbIt(results[1]);
-      }
+        if (err) {
+            return console.log(err);
+        }
+        var results = data.split(',');
+        console.log(results);
+        if (results[0] == 'spotify-this-song') {
+            spotifyThis(results[1]);
+        }
+        if (results[0] == 'my-tweets') {
+            tweetThis(results[1]);
+        }
+        if (results[0] == 'movie-this') {
+            omdbIt(results[1]);
+        }
     })
-  }
+}
