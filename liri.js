@@ -18,6 +18,12 @@ var client = new Twitter(keys.twitter);
 //     console.log(response);
 // });
 
+if (process.argv[2] === "tweet-this") {
+    tweetThis(
+        process.argv[3]
+    );
+}
+
 function tweetThis(tweetstring) {
     var params = { screen_name: '@phil_skeezix' };
     client.get('statuses/user_timeline', function (error, tweets, response) {
@@ -39,24 +45,22 @@ function tweetThis(tweetstring) {
 //         console.error('Error occurred: ' + err);
 //     });
 
-if(process.argv[2] === "spotify-this-song") {
+if (process.argv[2] === "spotify-this-song") {
     spotifyThis(
         process.argv[3]
     );
-
-
 }
 
-function spotifyThis(spotifystring){
-   
-  spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
-    if (err) {
-      return console.log('Error occurred: ' + err);
-    }
-   
-  console.log(data); 
-  console.log(JSON.stringify(data, null, 2));
-  });
+function spotifyThis(spotifystring) {
+
+    spotify.search({ type: 'track', query: 'All the Small Things' }, function (err, data) {
+        if (err) {
+            return console.log('Error occurred: ' + err);
+        }
+
+        console.log(data);
+        console.log(JSON.stringify(data, null, 2));
+    });
 }
 
 
